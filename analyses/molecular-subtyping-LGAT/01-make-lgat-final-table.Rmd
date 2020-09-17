@@ -37,9 +37,10 @@ identifiers_df <- clinical_df %>%
          Kids_First_Biospecimen_ID,
          sample_id)
 
-# get all RNA-Seq biospecimen IDs where short_histology == LGAT
+# get all RNA-Seq biospecimen IDs where pathology_diagnosis includes Low-grade glioma/astrocytoma 
+# (this will include one that also has `;Other`)
 lgat_rnaseq_bsids <- clinical_df %>% 
-  filter(short_histology == "LGAT",
+  filter(grepl("Low-grade glioma/astrocytoma", pathology_diagnosis),
          experimental_strategy == "RNA-Seq") %>%
   pull(Kids_First_Biospecimen_ID)
 

@@ -1,5 +1,5 @@
 # K S Gaonkar 2020
-# Subsets the consensus mutation file to biospecimens where short_histology == LGAT
+# Subsets the consensus mutation file to biospecimens where pathology_diagnosis is LGAT
 
 # pipes
 library(magrittr)
@@ -23,7 +23,7 @@ consensusMutation <- readr::read_tsv(file.path(root_dir,"data","pbta-snv-consens
 
 # Filter for LGAT samples
 lgat_wgs_subset <- clinical %>%
-  dplyr::filter(short_histology == "LGAT",
+  dplyr::filter(grepl("Low-grade glioma/astrocytoma", pathology_diagnosis),
                 sample_type == "Tumor",
                 composition == "Solid Tissue",
                 experimental_strategy == "WGS") %>%
